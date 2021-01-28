@@ -1,10 +1,11 @@
 package test;
 
+import java.util.Scanner;
 
 public class ArrayQueue implements Queue {
 
 	int front;         
-	int rear;           		
+	int last;           		
 	Object [] queue;
 	
 	public ArrayQueue(int initialCapacity)
@@ -23,7 +24,7 @@ public class ArrayQueue implements Queue {
 	
 	public boolean isEmpty()
     {
-		return front == rear;
+		return front == last;
 	}
 
 
@@ -35,17 +36,17 @@ public class ArrayQueue implements Queue {
 	       return queue[(front + 1) % queue.length];
 	 }
  	
-	public Object getRearElement()
+	public Object getLastElement()
 	   {
 	      if (isEmpty())
 	         return null;
 	      else
-	         return queue[rear];
+	         return queue[last];
 	   }
 	
 	public void put(Object theElement)
 	   {
-	      if ((rear + 1) % queue.length == front)
+	      if ((last + 1) % queue.length == front)
 	      {
 	         Object [] newQueue = new Object [2 * queue.length];
 	         int start = (front + 1) % queue.length;
@@ -57,15 +58,15 @@ public class ArrayQueue implements Queue {
 	            System.arraycopy(queue, start, newQueue, 0,
 	                             queue.length - start);
 	            System.arraycopy(queue, 0, newQueue,
-	                             queue.length - start, rear + 1);
+	                             queue.length - start, last + 1);
 	         }
 	         front = newQueue.length - 1;
-	         rear = queue.length - 2; 
+	         last = queue.length - 2; 
 	         queue = newQueue;
 	      }
 
-	      rear = (rear + 1) % queue.length;
-	      queue[rear] = theElement;
+	      last = (last + 1) % queue.length;
+	      queue[last] = theElement;
 	   }
 	
 
@@ -79,36 +80,81 @@ public class ArrayQueue implements Queue {
 	      return frontElement;
 	   }
 	
+	 public void queueHaruulah() 
+	    { 
+	        int i; 
+	        if (front == last) { 
+	            System.out.printf("\nQueue is Empty\n"); 
+	            return; 
+	        } 
+	        for (i = front; i < last; i++) { 
+	            System.out.printf("%d ", queue[i+1]); 
+	        } 
+	        return; 
+	    } 
+	
 	public static void main(String[] args) {
 		
-		int x;
-	      ArrayQueue q = new ArrayQueue(3);
-	      // add a few elements
-	      q.put(new Integer(1));
-	      q.put(new Integer(2));
-	      q.put(new Integer(3));
-	      q.put(new Integer(4));
-
-	      // remove and add to test wraparound array doubling
-	      q.remove();
-	      q.remove();
-	      q.put(new Integer(5));
-	      q.put(new Integer(6));
-	      q.put(new Integer(7));
-	      q.put(new Integer(8));
-	      q.put(new Integer(9));
-	      q.put(new Integer(10));
-	      q.put(new Integer(11));
-	      q.put(new Integer(12));
-
-	      // delete all elements
-	      while (!q.isEmpty())
-	      {
-	         System.out.println("Rear element is " + q.getRearElement());
-	         System.out.println("Front element is " + q.getFrontElement());
-	         System.out.println("Removed the element " + q.remove());
-	      }
+	      ArrayQueue q = new ArrayQueue(10);
+	      boolean exit = false;
+			String garaasAvahUtga;
+			
+	        Scanner scan = new Scanner(System.in);
+	        System.out.println("Heden too oruulha bicheed, toonuuda oruulna uu: ");
+	        int z = scan.nextInt();
+	        for(int x=0;x<z;x++) {
+	        	q.put(scan.nextInt());
+	        }
+	        q.queueHaruulah();
+	        zaavar();
+	        
+	        try {
+				while(exit == false) {
+				
+				System.out.print("\nUgugduluu bichne uu!: ");
+				garaasAvahUtga = scan.next();
+				
+				
+				
+				switch(garaasAvahUtga) {
+				case "LastElement": System.out.println(q.getLastElement());
+					break;
+				case "FirstElement": System.out.println(q.getFrontElement());
+					break;
+				case "HoosonEseh": System.out.println(q.isEmpty());
+					break;
+				case "AddElement":
+					System.out.println("Heden too nemhee bicheed, toonuuda oruulna uu: ");
+			        int y = scan.nextInt();
+			        for(int x=0;x<y;x++) {
+			        	q.put(scan.nextInt());
+			        }
+			        System.out.println("Elementuud amjilttai nemegdlee.");
+					break;
+				case "RemoveElement": 
+					q.remove();
+					System.out.println("\nFIFO-iin daguu ehnii  element ustagdlaa.");
+					break;
+				case "QueueHarah": 
+					System.out.println("Odoogiin queue: ");
+					q.queueHaruulah();
+					break;
+				}
+				
+			}
+			}catch(Exception e) {
+				System.out.println(e);
+				}
 		 
 	}
-
+	public static void zaavar() {
+		System.out.println("\n\n          Zaavar           \n");
+		System.out.println("<keywords> : <zaavar>\n");
+		System.out.println(" LastElement   :  suuliin elementiig haruulah");
+		System.out.println(" FirstElement  :  ehnii elementiig haruulah");
+		System.out.println(" HoosonEseh    :  hooson eshiig harah");
+		System.out.println(" AddElement    :  element nemeh");
+		System.out.println(" RemoveElement :  element ustgah");
+		System.out.println(" QueueHarah    :  queue harah");
+	}
 }
