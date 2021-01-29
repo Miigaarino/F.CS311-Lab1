@@ -1,5 +1,6 @@
 package test;
 
+
 public class ArrayQueue implements Queue {
 
 	int front;         
@@ -19,8 +20,7 @@ public class ArrayQueue implements Queue {
 	{
 		this(10);
 	}
-<<<<<<< HEAD
-
+	
 	public boolean isEmpty()
     {
 		return front == rear;
@@ -34,9 +34,7 @@ public class ArrayQueue implements Queue {
 	    else
 	       return queue[(front + 1) % queue.length];
 	 }
- 
-=======
-	
+ 	
 	public Object getRearElement()
 	   {
 	      if (isEmpty())
@@ -70,7 +68,7 @@ public class ArrayQueue implements Queue {
 	      queue[rear] = theElement;
 	   }
 	
->>>>>>> branch 'master' of https://github.com/Miigaarino/F.CS311-Lab1.git
+
 	public Object remove()
 	   {
 	      if (isEmpty())
@@ -82,7 +80,34 @@ public class ArrayQueue implements Queue {
 	   }
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		int x;
+	      ArrayQueue q = new ArrayQueue(3);
+	      // add a few elements
+	      q.put(new Integer(1));
+	      q.put(new Integer(2));
+	      q.put(new Integer(3));
+	      q.put(new Integer(4));
+
+	      // remove and add to test wraparound array doubling
+	      q.remove();
+	      q.remove();
+	      q.put(new Integer(5));
+	      q.put(new Integer(6));
+	      q.put(new Integer(7));
+	      q.put(new Integer(8));
+	      q.put(new Integer(9));
+	      q.put(new Integer(10));
+	      q.put(new Integer(11));
+	      q.put(new Integer(12));
+
+	      // delete all elements
+	      while (!q.isEmpty())
+	      {
+	         System.out.println("Rear element is " + q.getRearElement());
+	         System.out.println("Front element is " + q.getFrontElement());
+	         System.out.println("Removed the element " + q.remove());
+	      }
 		 
 	}
 
