@@ -12,14 +12,28 @@ public class ArrayQueue implements Queue {
 	      throw new IllegalArgumentException
 	           ("initialCapacity must be >= 1");
       queue = new Object [initialCapacity + 1];
-	      // default front = rear = 0
+	   
 	}
 	
 	public ArrayQueue()
-	{// use default capacity of 10
+	{
 		this(10);
 	}
-	
+
+	public boolean isEmpty()
+    {
+		return front == rear;
+	}
+
+
+	public Object getFrontElement()
+	{
+	    if (isEmpty())
+	       return null;
+	    else
+	       return queue[(front + 1) % queue.length];
+	 }
+ 
 	public Object remove()
 	   {
 	      if (isEmpty())
