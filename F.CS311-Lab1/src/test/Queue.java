@@ -1,10 +1,11 @@
 package test;
 
-public interface Queue
+public interface Queue<T>
 {
-   public boolean isEmpty();
-   public Object getFrontElement();
-   public Object getRearElement();
-   public void put(Object theObject);
-   public Object remove();
+		public void add (T element);
+		public T dequeue();
+		public T first();
+		public boolean isEmpty();
+		public int size();
+		public String toString();
 }
